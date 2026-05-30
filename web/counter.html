@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>櫃台收帳平板</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body class="counter-body">
+    <main class="counter-app">
+      <header class="counter-header">
+        <div>
+          <p class="eyebrow">COUNTER TABLET</p>
+          <h1>櫃台收帳與出單</h1>
+        </div>
+        <div class="status-pill">
+          <span>Counter MQTT</span>
+          <strong id="counter-status">未連線</strong>
+        </div>
+      </header>
+
+      <section class="counter-grid">
+        <section class="panel">
+          <div class="panel-head">
+            <p class="eyebrow">Subscribe</p>
+            <h3>連線設定</h3>
+          </div>
+
+          <label class="field">
+            <span>WebSocket URL</span>
+            <input id="counter-broker-url" type="text" value="wss://broker.emqx.io:8084/mqtt">
+          </label>
+
+          <label class="field">
+            <span>Counter Topic</span>
+            <input id="counter-topic" type="text" value="restaurant/voice/orders/counter">
+          </label>
+
+          <div class="button-row">
+            <button id="counter-connect-button" class="primary-action" type="button">開始監看</button>
+            <button id="counter-clear-button" class="secondary-action" type="button">清除畫面</button>
+          </div>
+        </section>
+
+        <section class="panel orders-panel">
+          <div class="panel-head">
+            <p class="eyebrow">Confirmed Orders</p>
+            <h3>已確認訂單</h3>
+          </div>
+          <div id="order-feed" class="order-feed">
+            <p class="placeholder-copy">等待新訂單送進櫃台。</p>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script src="./counter.js"></script>
+  </body>
+</html>

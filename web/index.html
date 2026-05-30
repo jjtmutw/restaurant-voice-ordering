@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoCo 點單工作台</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body class="customer-body">
+    <div class="page-glow" aria-hidden="true"></div>
+
+    <main class="customer-app">
+      <section class="welcome-panel" id="welcome-panel">
+        <div class="brand-block">
+          <p class="eyebrow">COCO VOICE ORDER</p>
+          <h1>CoCo 都可<br>圓通店</h1>
+          <p class="intro">
+            歡迎使用語音點單。進入工作台後系統會自動連上 MQTT，並開始準備接收客戶語音需求。
+          </p>
+          <div class="brand-tags">
+            <span>中杯 / 大杯</span>
+            <span>甜度冰量</span>
+            <span>加料 +10</span>
+          </div>
+        </div>
+
+        <div class="welcome-stage">
+          <div class="stage-card">
+            <p class="stage-label">點單流程</p>
+            <ol class="flow-list">
+              <li>進入工作台後自動連上 MQTT</li>
+              <li>顧客看著菜單直接點餐</li>
+              <li>語音轉文字後送到後端解析</li>
+              <li>回傳訂單與金額，確認後送櫃台與印表機</li>
+            </ol>
+
+            <div class="menu-preview">
+              <p>試著說：</p>
+              <strong>我要兩杯大杯珍珠奶茶半糖少冰，再一杯金桔檸檬微糖去冰</strong>
+            </div>
+
+            <button id="start-order-button" class="primary-action" type="button">開始語音點單</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="ordering-shell hidden" id="ordering-shell">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">VOICE ORDERING</p>
+            <h2>CoCo 點單工作台</h2>
+          </div>
+          <div class="topbar-right">
+            <div class="status-pill">
+              <span>MQTT</span>
+              <strong id="mqtt-status">連線中</strong>
+            </div>
+            <div class="session-chip">
+              <span>Session ID</span>
+              <strong id="session-id-label">-</strong>
+            </div>
+          </div>
+        </header>
+
+        <section class="workspace-grid">
+          <section class="panel menu-panel">
+            <div class="panel-head">
+              <p class="eyebrow">Menu</p>
+              <h3>CoCo 菜單</h3>
+            </div>
+
+            <div class="menu-legend">
+              <span>冰量：正常冰 / 少冰 / 去冰 / 溫 / 熱</span>
+              <span>甜度：正常糖 / 少糖 / 半糖 / 微糖 / 無糖</span>
+              <span>加料：珍珠 / 粉角 / 布丁 / 仙草 / 西谷米 / 茉香茶凍</span>
+            </div>
+
+            <div id="menu-sections" class="menu-sections"></div>
+          </section>
+
+          <section class="right-column">
+            <section class="panel voice-panel compact-panel">
+              <div class="panel-head">
+                <p class="eyebrow">Voice</p>
+                <h3>客戶點單</h3>
+              </div>
+
+              <div class="inline-status">
+                <span>語音狀態</span>
+                <strong id="speech-status">待命中</strong>
+              </div>
+
+              <div class="button-row">
+                <button id="listen-button" class="primary-action" type="button">開始收音</button>
+                <button id="stop-button" class="secondary-action" type="button">停止收音</button>
+              </div>
+
+              <label class="field compact-field">
+                <span>辨識文字，可手動修改</span>
+                <textarea id="transcript-input" rows="2" placeholder="語音辨識後的文字會顯示在這裡，也可以直接打字修改後再送出。"></textarea>
+              </label>
+              <p class="edit-note">辨識完成後可直接在這裡修改內容，再送出本句需求。</p>
+              <div id="suggestion-panel" class="suggestion-panel hidden">
+                <span class="suggestion-title">猜你想點</span>
+                <div id="suggestion-list" class="suggestion-row"></div>
+              </div>
+
+              <div class="button-row">
+                <button id="send-button" class="primary-action" type="button">送出這句需求</button>
+                <button id="clear-button" class="secondary-action" type="button">清空文字</button>
+              </div>
+            </section>
+
+            <section class="panel bill-panel">
+              <div class="panel-head">
+                <p class="eyebrow">Bill</p>
+                <h3>訂單摘要</h3>
+              </div>
+
+              <div class="order-status-bar">
+                <span>最新狀態</span>
+                <strong id="order-status-label">尚未點餐</strong>
+              </div>
+
+              <div class="summary-card">
+                <div class="summary-lines" id="summary-lines">
+                  <p class="placeholder-copy">系統會把目前累積的完整訂單顯示在這裡，讓顧客即時確認。</p>
+                </div>
+                <dl class="totals">
+                  <div><dt>小計</dt><dd id="subtotal-value">NT$0</dd></div>
+                  <div><dt>稅金</dt><dd id="tax-value">NT$0</dd></div>
+                  <div><dt>服務費</dt><dd id="service-value">NT$0</dd></div>
+                  <div class="grand-total"><dt>應付總額</dt><dd id="total-value">NT$0</dd></div>
+                </dl>
+              </div>
+
+              <div class="button-row summary-actions">
+                <button id="confirm-button" class="primary-action" type="button">確認送單</button>
+                <button id="cancel-button" class="secondary-action" type="button">取消本單</button>
+              </div>
+            </section>
+
+            <section class="panel conversation-panel">
+              <div class="panel-head">
+                <p class="eyebrow">Conversation</p>
+                <h3>系統對話</h3>
+              </div>
+
+              <div id="conversation-log" class="conversation-log" aria-live="polite"></div>
+            </section>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

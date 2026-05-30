@@ -1,0 +1,352 @@
+{
+  "restaurant_name": "CoCo都可 圓通店",
+  "currency": "TWD",
+  "tax_rate": 0,
+  "service_charge_rate": 0,
+  "option_rules": {
+    "temperature": {
+      "default": "冰",
+      "choices": [
+        {
+          "label": "冰",
+          "aliases": ["正常冰", "冰的", "冷的", "冰飲"],
+          "price_delta": 0
+        },
+        {
+          "label": "少冰",
+          "aliases": ["微冰", "冰少一點", "少一點冰"],
+          "price_delta": 0
+        },
+        {
+          "label": "去冰",
+          "aliases": ["不要冰", "無冰", "完全去冰", "冰塊不要", "冰量零"],
+          "price_delta": 0
+        },
+        {
+          "label": "溫",
+          "aliases": ["常溫", "溫的", "溫溫的"],
+          "price_delta": 0
+        },
+        {
+          "label": "熱",
+          "aliases": ["熱的", "熱飲", "燙一點"],
+          "price_delta": 0
+        }
+      ]
+    },
+    "sweetness": {
+      "default": "正常糖",
+      "choices": [
+        {
+          "label": "正常糖",
+          "aliases": ["全糖", "標準糖", "正常甜"],
+          "price_delta": 0
+        },
+        {
+          "label": "少糖",
+          "aliases": ["七分糖", "糖少一點"],
+          "price_delta": 0
+        },
+        {
+          "label": "半糖",
+          "aliases": ["五分糖", "一半糖"],
+          "price_delta": 0
+        },
+        {
+          "label": "微糖",
+          "aliases": ["三分糖", "糖微一點"],
+          "price_delta": 0
+        },
+        {
+          "label": "無糖",
+          "aliases": ["不要糖", "零糖", "不加糖"],
+          "price_delta": 0
+        }
+      ]
+    },
+    "size_ml": {
+      "default": "M",
+      "choices": [
+        {
+          "label": "M",
+          "aliases": ["中杯", "中", "中的"],
+          "price_delta": 0
+        },
+        {
+          "label": "L",
+          "aliases": ["大杯", "大", "大的"],
+          "price_delta": 0
+        }
+      ]
+    },
+    "add_ons": {
+      "default": "無加料",
+      "multi": true,
+      "choices": [
+        {
+          "label": "珍珠",
+          "aliases": ["波霸", "加珍珠"],
+          "price_delta": 10
+        },
+        {
+          "label": "粉角",
+          "aliases": ["粉粿", "加粉角"],
+          "price_delta": 10
+        },
+        {
+          "label": "布丁",
+          "aliases": ["加布丁"],
+          "price_delta": 10
+        },
+        {
+          "label": "仙草",
+          "aliases": ["仙草凍", "加仙草"],
+          "price_delta": 10
+        },
+        {
+          "label": "西谷米",
+          "aliases": ["西米露", "加西谷米"],
+          "price_delta": 10
+        },
+        {
+          "label": "茉香茶凍",
+          "aliases": ["茶凍", "加茶凍"],
+          "price_delta": 10
+        }
+      ]
+    }
+  },
+  "items": [
+    {
+      "id": "americano",
+      "name": "職人美式",
+      "aliases": ["美式", "美式咖啡"],
+      "price": 50,
+      "option_rule_ids": ["temperature", "sweetness"]
+    },
+    {
+      "id": "cafe_latte",
+      "name": "職人拿鐵",
+      "aliases": ["拿鐵", "咖啡拿鐵"],
+      "price": 65,
+      "option_rule_ids": ["temperature", "sweetness"]
+    },
+    {
+      "id": "latte_with_pearl",
+      "name": "珍珠粉角職人拿鐵",
+      "aliases": ["珍珠拿鐵", "粉角拿鐵", "珍珠職人拿鐵", "粉角職人拿鐵"],
+      "price": 75,
+      "option_rule_ids": ["temperature", "sweetness"]
+    },
+    {
+      "id": "brown_sugar_latte",
+      "name": "珍珠黑糖拿鐵",
+      "aliases": ["黑糖拿鐵", "珍珠黑糖鮮奶"],
+      "price": 80,
+      "option_rule_ids": ["temperature"]
+    },
+    {
+      "id": "grapefruit_lemon_americano",
+      "name": "紅柚香檸美式",
+      "aliases": ["紅柚美式", "香檸美式"],
+      "price": 80,
+      "option_rule_ids": ["temperature", "sweetness"]
+    },
+    {
+      "id": "sicily_lemon_americano",
+      "name": "西西里手搖檸檬美式",
+      "aliases": ["西西里美式", "檸檬美式"],
+      "price": 80,
+      "option_rule_ids": ["temperature", "sweetness"]
+    },
+    {
+      "id": "coconut_latte",
+      "name": "生椰職人拿鐵",
+      "aliases": ["生椰拿鐵"],
+      "price": 75,
+      "option_rule_ids": ["temperature", "sweetness"]
+    },
+    {
+      "id": "coconut_latte_with_gem_boba",
+      "name": "粉角生椰拿鐵",
+      "aliases": ["粉角生椰職人拿鐵"],
+      "price": 85,
+      "option_rule_ids": ["temperature", "sweetness"]
+    },
+    {
+      "id": "green_tea",
+      "name": "茉莉綠茶",
+      "sizes": { "M": 30, "L": 35 },
+      "aliases": ["綠茶", "茉莉綠"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness", "add_ons"]
+    },
+    {
+      "id": "spring_oolong",
+      "name": "四季春青茶",
+      "sizes": { "M": 30, "L": 35 },
+      "aliases": ["四季春", "青茶"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness", "add_ons"]
+    },
+    {
+      "id": "light_oolong",
+      "name": "21歲輕烏龍",
+      "sizes": { "M": 30, "L": 35 },
+      "aliases": ["輕烏龍", "21歲烏龍"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness", "add_ons"]
+    },
+    {
+      "id": "black_tea",
+      "name": "高山紅茶",
+      "sizes": { "M": 30, "L": 35 },
+      "aliases": ["紅茶", "高山紅"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness", "add_ons"]
+    },
+    {
+      "id": "barley_tea",
+      "name": "日安大麥",
+      "sizes": { "M": 30, "L": 35 },
+      "aliases": ["大麥茶"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness"]
+    },
+    {
+      "id": "honey_grass_jelly",
+      "name": "仙草蜜",
+      "sizes": { "M": 35, "L": 40 },
+      "aliases": ["仙草蜜茶"],
+      "option_rule_ids": ["size_ml", "temperature"]
+    },
+    {
+      "id": "spring_coconut_jelly_tea",
+      "name": "四季珍椰青",
+      "sizes": { "M": 45, "L": 50 },
+      "aliases": ["珍椰青", "四季珍椰"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness"]
+    },
+    {
+      "id": "lemon_light_oolong",
+      "name": "21歲輕檸烏龍",
+      "sizes": { "M": 45, "L": 55 },
+      "aliases": ["輕檸烏龍"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness"]
+    },
+    {
+      "id": "lemon_kumquat_jelly",
+      "name": "檸檬奇遇桔",
+      "price": 60,
+      "aliases": ["檸檬奇遇桔茉香茶凍", "奇遇桔"],
+      "option_rule_ids": ["temperature", "sweetness"]
+    },
+    {
+      "id": "kumquat_lemon",
+      "name": "金桔檸檬",
+      "sizes": { "M": 60, "L": 70 },
+      "aliases": ["金桔檸檬汁"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness"]
+    },
+    {
+      "id": "wintermelon_lemon_gem_boba",
+      "name": "粉角檸檬冬瓜",
+      "sizes": { "M": 55, "L": 65 },
+      "aliases": ["檸檬冬瓜粉角", "冬瓜檸檬粉角"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness"]
+    },
+    {
+      "id": "passion_mango_green_tea",
+      "name": "百香芒果綠茶",
+      "sizes": { "M": 45, "L": 55 },
+      "aliases": ["百香綠茶", "芒果綠茶"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness"]
+    },
+    {
+      "id": "yakult_green_tea",
+      "name": "綠茶養樂多",
+      "price": 70,
+      "aliases": ["養樂多綠茶"],
+      "option_rule_ids": ["temperature", "sweetness", "add_ons"]
+    },
+    {
+      "id": "wintermelon_buckwheat",
+      "name": "蕎麥冬瓜露",
+      "sizes": { "M": 45, "L": 50 },
+      "aliases": ["冬瓜露", "蕎麥冬瓜"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness"]
+    },
+    {
+      "id": "passion_double_pop",
+      "name": "百香雙響炮",
+      "price": 70,
+      "aliases": ["雙響炮"],
+      "option_rule_ids": ["temperature", "sweetness"]
+    },
+    {
+      "id": "coconut_mango_pomelo",
+      "name": "生椰楊枝甘露",
+      "sizes": { "M": 70, "L": 90 },
+      "aliases": ["楊枝甘露", "生椰甘露"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness"]
+    },
+    {
+      "id": "grapefruit_fruit_tea",
+      "name": "葡萄柚果粒茶",
+      "price": 70,
+      "aliases": ["葡萄柚綠茶", "葡萄柚茶"],
+      "option_rule_ids": ["temperature", "sweetness"]
+    },
+    {
+      "id": "milk_tea_brothers",
+      "name": "奶茶三兄弟",
+      "price": 70,
+      "aliases": ["三兄弟奶茶"],
+      "option_rule_ids": ["temperature", "sweetness"]
+    },
+    {
+      "id": "assam_milk_tea",
+      "name": "阿薩姆奶茶",
+      "sizes": { "M": 40, "L": 50 },
+      "aliases": ["奶茶", "阿薩姆"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness", "add_ons"]
+    },
+    {
+      "id": "milk_tea_with_pearl",
+      "name": "珍珠粉角奶茶",
+      "sizes": { "M": 50, "L": 60 },
+      "aliases": ["珍珠奶茶", "粉角奶茶"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness"]
+    },
+    {
+      "id": "sago_milk_tea",
+      "name": "西谷米奶茶",
+      "sizes": { "M": 50, "L": 60 },
+      "aliases": ["西米露奶茶"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness"]
+    },
+    {
+      "id": "jasmine_jelly_milk_green",
+      "name": "茉香凍奶綠",
+      "sizes": { "M": 50, "L": 60 },
+      "aliases": ["奶綠", "茉香奶綠"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness"]
+    },
+    {
+      "id": "grass_jelly_milk",
+      "name": "手作仙草凍乳",
+      "price": 70,
+      "aliases": ["仙草凍乳", "仙草奶"],
+      "option_rule_ids": ["temperature", "sweetness"]
+    },
+    {
+      "id": "black_tea_latte",
+      "name": "英式鮮奶茶",
+      "sizes": { "M": 55, "L": 70 },
+      "aliases": ["鮮奶茶", "紅茶拿鐵"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness", "add_ons"]
+    },
+    {
+      "id": "black_tea_latte_with_pearl",
+      "name": "珍珠粉角鮮奶茶",
+      "sizes": { "M": 65, "L": 75 },
+      "aliases": ["珍珠鮮奶茶", "粉角鮮奶茶"],
+      "option_rule_ids": ["size_ml", "temperature", "sweetness"]
+    }
+  ]
+}
